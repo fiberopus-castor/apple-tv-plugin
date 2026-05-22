@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "appletv-dg": {
+      "command": "bash",
+      "args": ["${HOME}/Claude/cli-tools/AppleTV_Control/mcp-server/run.sh"],
+      "env": {}
+    }
+  }
+}

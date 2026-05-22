@@ -1,0 +1,14 @@
+{
+  "name": "apple-tv",
+  "version": "0.1.0",
+  "description": "Voll-Remote-Kontrolle Apple TV via pyatv + MCP-Integration. App-Launch, Navigation, Audio-Routing (HomePod/TV/Both), Companion-Heartbeat. tvOS-26-Bug-Workaround inkludiert. Multi-Device-ready.",
+  "author": {
+    "name": "Percy-Bodo von Oheimb-Loup",
+    "email": "pol@alveoncapital.com",
+    "url": "https://github.com/fiberopus-castor"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/fiberopus-castor/apple-tv-plugin",
+  "repository": "https://github.com/fiberopus-castor/apple-tv-plugin",
+  "keywords": ["apple-tv", "tvos", "pyatv", "companion", "airplay", "homepod", "remote", "smart-home"]
+}
