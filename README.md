@@ -99,6 +99,51 @@ Vorbereitet für Bonn-Atelier (3 Apple TVs):
 | `launch_app` schlägt fehl | Bundle-ID-Tippfehler? Tabelle im Skill checken |
 | Audio bleibt auf TV trotz `homepod` | HomePod im selben WLAN? AirPlay-ID in Credentials korrekt? |
 
+## Multi-Host-Installation
+
+Fuer den produktiven Rollout des Plugins auf einem zweiten Host (z.B. Esslingen-NUC) gibt es ab v0.2.0 einen idempotenten Bootstrapper unter `scripts/install.sh`.
+
+### Auf einem neuen Linux-Host
+1. Plugin installieren: `/plugin install apple-tv@oheimb-plugins`
+2. CLI-Tool + venv bootstrappen:
+   ```bash
+   bash ~/.claude/plugins/cache/oheimb-plugins/apple-tv/<version>/scripts/install.sh
+   ```
+   Das Script:
+   - klont `appletv-control-cli` nach `~/Claude/cli-tools/AppleTV_Control/`
+   - legt das venv an und installiert `pyatv`, `flask`, `mcp`
+   - wendet den tvOS-26-Patch an (idempotent)
+   - legt Symlinks in `~/.local/bin/` (`atv-dg`, `atv-dg-audio`, `atv-dg-with-homepod`) an
+3. Credentials wiederherstellen:
+   - **Mit B2-Backup:** restic-ENV in `~/Claude/credentials/CastorOS/restic-credentials.env` ablegen, dann
+     ```bash
+     bash scripts/install.sh restore-credentials
+     ```
+   - **Ohne B2-Backup:** Physisch am TV pairen mit `atv-dg pair`, anschliessend JSON-File nach `~/Claude/credentials/AppleTV/dg-wohnzimmer.json` (chmod 600) ablegen
+4. Verifikation: `bash scripts/install.sh verify` muss alles PASS reporten
+5. Claude Code neu starten oder `/reload-plugins`
+
+### Subcommands
+| Befehl | Wirkung |
+|---|---|
+| `install.sh bootstrap` | CLI-Tool + venv + Symlinks (idempotent) |
+| `install.sh restore-credentials` | restic-Restore aus B2, sonst manuelle Anleitung |
+| `install.sh verify` | Pre-Flight: Symlinks, Credentials-Mode, Plugin-Registry |
+| `install.sh` (ohne Argument) | bootstrap + verify sequentiell |
+
+### Komponenten-Mapping
+| Schicht | Pfad | Quelle |
+|---|---|---|
+| Plugin | `~/.claude/plugins/cache/oheimb-plugins/apple-tv/<ver>/` | Marketplace-Install |
+| CLI-Tool | `~/Claude/cli-tools/AppleTV_Control/` | GitHub `fiberopus-castor/appletv-control-cli` |
+| Credentials | `~/Claude/credentials/AppleTV/` | restic restore aus B2 ODER manuelles Pairing |
+| Symlinks | `~/.local/bin/atv-dg*` | `install.sh bootstrap` |
+
+### Sicherheitsregeln
+- `install.sh` loggt NIEMALS Credentials oder restic-ENV in stdout
+- Symlink-Targets werden vor `ln` geprueft (kein Symlink-Hijack)
+- Credentials werden mit `chmod 600` versehen
+
 ## Lizenz
 
 MIT — siehe `LICENSE`.
