@@ -27,7 +27,7 @@ Voll-Remote-Kontrolle für Apple TV via `pyatv` + MCP. App-Launch, Navigation, A
 ### Plugin aktivieren
 Per Marketplace (sobald gelistet):
 ```
-/plugin marketplace add fiberopus-castor/CastorOS
+/plugin marketplace add fiberopus-castor/castoros-marketplace
 /plugin install apple-tv@CastorOS
 ```
 
