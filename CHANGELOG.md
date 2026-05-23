@@ -1,5 +1,10 @@
 # Changelog
 
+## [0.2.1] — 2026-05-23
+
+### Changed
+- README "Multi-Host-Installation" auf neuen Marketplace-Slug `@CastorOS` umgestellt (vorher `@oheimb-plugins` — deprecated nach CastorOS Naming Standard 2026-05-23).
+
 ## [0.2.0] — 2026-05-22
 
 ### Added

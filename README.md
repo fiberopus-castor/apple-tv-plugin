@@ -27,8 +27,8 @@ Voll-Remote-Kontrolle für Apple TV via `pyatv` + MCP. App-Launch, Navigation, A
 ### Plugin aktivieren
 Per Marketplace (sobald gelistet):
 ```
-/plugin marketplace add fiberopus-castor/oheimb-plugins
-/plugin install apple-tv@oheimb-plugins
+/plugin marketplace add fiberopus-castor/CastorOS
+/plugin install apple-tv@CastorOS
 ```
 
 Lokal direkt (aktuell):
@@ -104,10 +104,10 @@ Vorbereitet für Bonn-Atelier (3 Apple TVs):
 Fuer den produktiven Rollout des Plugins auf einem zweiten Host (z.B. Esslingen-NUC) gibt es ab v0.2.0 einen idempotenten Bootstrapper unter `scripts/install.sh`.
 
 ### Auf einem neuen Linux-Host
-1. Plugin installieren: `/plugin install apple-tv@oheimb-plugins`
+1. Plugin installieren: `/plugin install apple-tv@CastorOS`
 2. CLI-Tool + venv bootstrappen:
    ```bash
-   bash ~/.claude/plugins/cache/oheimb-plugins/apple-tv/<version>/scripts/install.sh
+   bash ~/.claude/plugins/cache/CastorOS/apple-tv/<version>/scripts/install.sh
    ```
    Das Script:
    - klont `appletv-control-cli` nach `~/Claude/cli-tools/AppleTV_Control/`
@@ -134,7 +134,7 @@ Fuer den produktiven Rollout des Plugins auf einem zweiten Host (z.B. Esslingen-
 ### Komponenten-Mapping
 | Schicht | Pfad | Quelle |
 |---|---|---|
-| Plugin | `~/.claude/plugins/cache/oheimb-plugins/apple-tv/<ver>/` | Marketplace-Install |
+| Plugin | `~/.claude/plugins/cache/CastorOS/apple-tv/<ver>/` | Marketplace-Install |
 | CLI-Tool | `~/Claude/cli-tools/AppleTV_Control/` | GitHub `fiberopus-castor/appletv-control-cli` |
 | Credentials | `~/Claude/credentials/AppleTV/` | restic restore aus B2 ODER manuelles Pairing |
 | Symlinks | `~/.local/bin/atv-dg*` | `install.sh bootstrap` |
